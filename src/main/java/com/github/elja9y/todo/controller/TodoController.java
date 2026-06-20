@@ -2,6 +2,7 @@ package com.github.elja9y.todo.controller;
 
 import com.github.elja9y.todo.dto.CreateTodoRequest;
 import com.github.elja9y.todo.dto.TodoResponse;
+import com.github.elja9y.todo.dto.UpdateTodoRequest;
 import com.github.elja9y.todo.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +32,18 @@ public class TodoController {
     @GetMapping()
     public ResponseEntity<List<TodoResponse>> getAllTodos() {
         return ResponseEntity.ok(todoService.getAllTodos());
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<TodoResponse> updateTodo(@PathVariable Long id,
+                                                   @RequestBody UpdateTodoRequest request){
+        TodoResponse response = todoService.updateTodo(id, request);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteTodo(@PathVariable Long id){
+        todoService.deleteTodoById(id);
+        return ResponseEntity.ok("Deleted successfully");
     }
 }

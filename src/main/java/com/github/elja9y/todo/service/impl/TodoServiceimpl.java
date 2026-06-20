@@ -2,6 +2,7 @@ package com.github.elja9y.todo.service.impl;
 
 import com.github.elja9y.todo.dto.CreateTodoRequest;
 import com.github.elja9y.todo.dto.TodoResponse;
+import com.github.elja9y.todo.dto.UpdateTodoRequest;
 import com.github.elja9y.todo.entity.Todo;
 import com.github.elja9y.todo.mapper.TodoStructMapper;
 import com.github.elja9y.todo.repository.TodoRepository;
@@ -53,6 +54,23 @@ public class TodoServiceimpl implements TodoService {
                 .toList();
 
         return response;
+    }
+
+    @Override
+    public TodoResponse updateTodo(Long id, UpdateTodoRequest request) {
+        Todo todo = getTodoEntityById(id);
+
+        todoMapper.updateTodo(request, todo);
+
+        Todo savedTodo = todoRepository.save(todo);
+
+        return todoMapper.toTodoResponse(todo);
+    }
+
+    @Override
+    public void deleteTodoById(Long id) {
+        Todo todo = getTodoEntityById(id);
+        todoRepository.delete(todo);
     }
 
     // helper used in multiple places
