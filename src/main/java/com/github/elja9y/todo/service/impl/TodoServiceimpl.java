@@ -4,6 +4,7 @@ import com.github.elja9y.todo.dto.CreateTodoRequest;
 import com.github.elja9y.todo.dto.TodoResponse;
 import com.github.elja9y.todo.dto.UpdateTodoRequest;
 import com.github.elja9y.todo.entity.Todo;
+import com.github.elja9y.todo.exception.TodoException;
 import com.github.elja9y.todo.mapper.TodoStructMapper;
 import com.github.elja9y.todo.repository.TodoRepository;
 import com.github.elja9y.todo.service.TodoService;
@@ -88,6 +89,6 @@ public class TodoServiceimpl implements TodoService {
     private Todo getTodoEntityById(Long id) {
         return todoRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Account does not exist"));
+                .orElseThrow(() -> TodoException.todoNotFound());
     }
 }
