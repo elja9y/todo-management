@@ -73,6 +73,17 @@ public class TodoServiceimpl implements TodoService {
         todoRepository.delete(todo);
     }
 
+    @Override
+    public TodoResponse toggleCompletedStatus(Long id) {
+        Todo todo = getTodoEntityById(id);
+
+        todo.setCompleted(!todo.isCompleted());
+
+        Todo savedTodo = todoRepository.save(todo);
+
+        return todoMapper.toTodoResponse(savedTodo);
+    }
+
     // helper used in multiple places
     private Todo getTodoEntityById(Long id) {
         return todoRepository

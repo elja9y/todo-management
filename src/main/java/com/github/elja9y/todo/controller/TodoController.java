@@ -34,7 +34,7 @@ public class TodoController {
         return ResponseEntity.ok(todoService.getAllTodos());
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<TodoResponse> updateTodo(@PathVariable Long id,
                                                    @RequestBody UpdateTodoRequest request){
         TodoResponse response = todoService.updateTodo(id, request);
@@ -45,5 +45,10 @@ public class TodoController {
     public ResponseEntity<String> deleteTodo(@PathVariable Long id){
         todoService.deleteTodoById(id);
         return ResponseEntity.ok("Deleted successfully");
+    }
+
+    @PutMapping("/toggle/{id}")
+    public ResponseEntity<TodoResponse> toggleCompletedStatus(@PathVariable Long id){
+        return ResponseEntity.ok(todoService.toggleCompletedStatus(id));
     }
 }
