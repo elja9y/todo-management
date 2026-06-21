@@ -53,7 +53,7 @@ public class TodoController {
         return ResponseEntity.ok("Deleted successfully");
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/toggle/{id}")
     public ResponseEntity<TodoResponse> toggleCompletedStatus(@PathVariable Long id){
         return ResponseEntity.ok(todoService.toggleCompletedStatus(id));
