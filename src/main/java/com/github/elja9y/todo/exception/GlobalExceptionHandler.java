@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
     // Handle account module specific exceptions: The exception handler intercepts
     // Exceptions before going too client, and instead, it builds a well-formed one
     // It returns a response type ProblemDetails, which has:
-    // 1) The exception date 2) The error u typed on service logic
+    // 1) The error date 2) The error message itself
     // 3) The endpoint URI fetched from current http context 4) the suiting status code
 
     @ExceptionHandler(TodoException.class)
