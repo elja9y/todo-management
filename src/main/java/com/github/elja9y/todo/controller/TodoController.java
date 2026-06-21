@@ -1,8 +1,8 @@
 package com.github.elja9y.todo.controller;
 
-import com.github.elja9y.todo.dto.CreateTodoRequest;
-import com.github.elja9y.todo.dto.TodoResponse;
-import com.github.elja9y.todo.dto.UpdateTodoRequest;
+import com.github.elja9y.todo.dto.todo.CreateTodoRequest;
+import com.github.elja9y.todo.dto.todo.TodoResponse;
+import com.github.elja9y.todo.dto.todo.UpdateTodoRequest;
 import com.github.elja9y.todo.service.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

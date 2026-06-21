@@ -1,10 +1,5 @@
 package com.github.elja9y.todo.mapper;
 
-import com.github.elja9y.todo.dto.CreateTodoRequest;
-import com.github.elja9y.todo.dto.TodoResponse;
-import com.github.elja9y.todo.entity.Todo;
-import org.mapstruct.Mapper;
-
 //public class TodoMapper {
 //    public static TodoResponse toTodoResponse(Todo todo){
 //        TodoResponse response = new TodoResponse(

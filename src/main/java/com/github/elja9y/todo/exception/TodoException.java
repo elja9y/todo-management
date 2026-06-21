@@ -2,15 +2,9 @@ package com.github.elja9y.todo.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class TodoException extends RuntimeException {
-    public final String errorCode;
-    public final HttpStatus status;
-
+public class TodoException extends AppException {
     public TodoException(String message, String errorCode, HttpStatus status) {
-        super(message);
-
-        this.errorCode = errorCode;
-        this.status = status;
+        super(message, errorCode, status);
     }
 
     // Errors

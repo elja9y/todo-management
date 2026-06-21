@@ -14,14 +14,15 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Handle account module specific exceptions: The exception handler intercepts
+    // Handle module-specific exceptions: The exception handler intercepts
     // Exceptions before going too client, and instead, it builds a well-formed one
     // It returns a response type ProblemDetails, which has:
     // 1) The error date 2) The error message itself
     // 3) The endpoint URI fetched from current http context 4) the suiting status code
 
-    @ExceptionHandler(TodoException.class)
-    public ResponseEntity<ErrorDetails> handleAccountException(TodoException exception,
+    // Handles all EntityExceptions
+    @ExceptionHandler(AppException.class)
+    public ResponseEntity<ErrorDetails> handleAccountException(AppException exception,
                                                                WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(
                 LocalDateTime.now(),

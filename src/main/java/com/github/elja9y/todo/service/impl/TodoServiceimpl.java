@@ -1,15 +1,13 @@
 package com.github.elja9y.todo.service.impl;
 
-import com.github.elja9y.todo.dto.CreateTodoRequest;
-import com.github.elja9y.todo.dto.TodoResponse;
-import com.github.elja9y.todo.dto.UpdateTodoRequest;
+import com.github.elja9y.todo.dto.todo.CreateTodoRequest;
+import com.github.elja9y.todo.dto.todo.TodoResponse;
+import com.github.elja9y.todo.dto.todo.UpdateTodoRequest;
 import com.github.elja9y.todo.entity.Todo;
 import com.github.elja9y.todo.exception.TodoException;
 import com.github.elja9y.todo.mapper.TodoStructMapper;
 import com.github.elja9y.todo.repository.TodoRepository;
 import com.github.elja9y.todo.service.TodoService;
-import jdk.dynalink.linker.LinkerServices;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +16,7 @@ import java.util.List;
 public class TodoServiceimpl implements TodoService {
     private TodoRepository todoRepository;
 //    private ModelMapper modelMapper;
-    TodoStructMapper todoMapper;
+    private TodoStructMapper todoMapper;
 
     public TodoServiceimpl(TodoRepository todoRepository,
                            //ModelMapper modelMapper,

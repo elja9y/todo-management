@@ -1,4 +1,4 @@
-package com.github.elja9y.todo.dto;
+package com.github.elja9y.todo.dto.todo;
 
 public record UpdateTodoRequest(
         String title,
