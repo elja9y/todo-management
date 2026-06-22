@@ -9,6 +9,7 @@ import com.github.elja9y.todo.exception.UserException;
 import com.github.elja9y.todo.mapper.UserStructMapper;
 import com.github.elja9y.todo.repository.RoleRepository;
 import com.github.elja9y.todo.repository.UserRepository;
+import com.github.elja9y.todo.security.JwtTokenProvider;
 import com.github.elja9y.todo.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,6 +34,8 @@ public class AuthServiceImpl implements AuthService {
     private UserStructMapper userMapper;
 
     private AuthenticationManager authenticationManager;
+
+    private JwtTokenProvider jwtTokenProvider;
 
 //    public AuthServiceImpl(
 //                UserRepository userRepository,
@@ -84,6 +87,7 @@ public class AuthServiceImpl implements AuthService {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return "Logged in successfully";
+        String token = jwtTokenProvider.generateToken(authentication);
+        return token;
     }
 }

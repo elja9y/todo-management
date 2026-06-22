@@ -1,5 +1,6 @@
 package com.github.elja9y.todo.controller;
 
+import com.github.elja9y.todo.dto.auth.JwtAuthResponse;
 import com.github.elja9y.todo.dto.auth.LoginRequest;
 import com.github.elja9y.todo.dto.auth.RegisterRequest;
 import com.github.elja9y.todo.service.AuthService;
@@ -19,11 +20,16 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
-        return new ResponseEntity<>(authService.register(request), HttpStatus.CREATED);
+        return new ResponseEntity<>(authService.register(request), HttpStatus.OK);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
-        return ResponseEntity.ok(authService.login(request));
+    public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginRequest request) {
+        String token = authService.login(request);
+
+        JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
+        jwtAuthResponse.setAccessToken(token);
+
+        return new ResponseEntity<>(jwtAuthResponse, HttpStatus.CREATED);
     }
 }

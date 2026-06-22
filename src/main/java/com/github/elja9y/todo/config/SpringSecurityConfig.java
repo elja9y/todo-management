@@ -1,5 +1,7 @@
 package com.github.elja9y.todo.config;
 
+import com.github.elja9y.todo.security.JwtAuthenticationEntryPoint;
+import com.github.elja9y.todo.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableMethodSecurity
 @Configuration
@@ -19,8 +22,15 @@ public class SpringSecurityConfig {
 
     private UserDetailsService userDetailsService;
 
-    public SpringSecurityConfig(UserDetailsService userDetailsService) {
+    JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    public SpringSecurityConfig(UserDetailsService userDetailsService,
+                                JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+                                JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.userDetailsService = userDetailsService;
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
     @Bean
@@ -40,7 +50,12 @@ public class SpringSecurityConfig {
                     authorize.requestMatchers("/api/auth/**").permitAll();
                     authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                     authorize.anyRequest().authenticated();
-                }).httpBasic(Customizer.withDefaults());
+                });
+
+        http.exceptionHandling(exception -> exception
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint));
+
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
